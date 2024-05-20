@@ -27,7 +27,7 @@ $ make grpc-error-load-test
 
 
 
-## Примеры запросов и ответов
+## Примеры запросов
 
 ### product_v1.ProductV1.Fetch
 
