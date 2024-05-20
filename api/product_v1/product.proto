@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+//import "buf/validate/validate.proto";
+package product_v1;
+
+option go_package = "github.com/f8nkgg/grpc/pkg/product_v1";
+
+service ProductV1 {
+  rpc Fetch(URL) returns (google.protobuf.Empty) {}
+  rpc List(ListRequest) returns (ListResponse) {}
+}
+
+message URL {
+  string value = 1; //[(buf.validate.field).string.uri = true];
+}
+
+
+message ListRequest {
+  int64 page_size = 1;
+  int64 page_number = 2;
+  google.protobuf.StringValue sort_by = 3;
+  google.protobuf.BoolValue sort_ascending = 4;
+}
+
+message ListResponse {
+  repeated Product products = 1;
+}
+
+message Product {
+  string name = 1;
+  double price = 2;
+  int64 price_changes = 3;
+  google.protobuf.Timestamp last_update = 4;
+}
